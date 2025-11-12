@@ -11,7 +11,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api", authRouter);
-app.use("/api", authRouter);
 app.use("/api", categoriesRouter);
 app.use("/api", questionsRouter);
 
