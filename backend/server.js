@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 app.use("/api", authRouter);
 app.use("/api", categoriesRouter);
 app.use("/api", questionsRouter);
@@ -23,9 +24,7 @@ const PORT = process.env.PORT || 3001;
 async function startServer() {
   try {
     const connection = await pool.getConnection();
-    console.log("database connected successfully");
     connection.release();
-
     app.listen(PORT, () => {
       console.log(`server running on port ${PORT}`);
     });

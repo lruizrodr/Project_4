@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
   const hash = await bcrypt.hash(password, 10);
   await pool.query("insert into users (username, password_hash) values (?, ?)", [
     username,
-    hash,
+    hash
   ]);
 
   res.status(201).json({ message: "user created" });
@@ -33,11 +33,13 @@ router.post("/login", async (req, res) => {
     "select user_id, password_hash from users where username=?",
     [username]
   );
+
   if (!rows.length)
     return res.status(401).json({ message: "invalid username or password" });
 
   const user = rows[0];
   const valid = await bcrypt.compare(password, user.password_hash);
+
   if (!valid)
     return res.status(401).json({ message: "invalid username or password" });
 
