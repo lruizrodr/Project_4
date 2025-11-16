@@ -34,7 +34,15 @@ export default function Dashboard() {
         <h3>Categories</h3>
         {categories.map((cat) => (
           <div key={cat.category_id}>
-            <button onClick={() => setActiveCategory(cat)}>
+            <button
+              onClick={() => setActiveCategory(cat)}
+              className={
+                activeCategory &&
+                activeCategory.category_id === cat.category_id
+                  ? "active-category"
+                  : ""
+              }
+            >
               {cat.name}
             </button>
           </div>

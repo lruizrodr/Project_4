@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const nav = useNavigate();
@@ -27,31 +27,40 @@ export default function Login() {
   }
 
   return (
-    <div className="page-container">
-      <h1>Login</h1>
+    <>
+      <div className="navbar"> eCloud Software FAQ & Help Forum</div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+      <div className="page-container">
+        <h1>Login</h1>
 
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Username</label>
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {error && <p>{error}</p>}
+          </div>
 
-        {error && <p>{error}</p>}
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+          <button type="submit">Log In</button>
+
+          <div className="bottom-link">
+            <p>
+              Don't have an account? <Link to="/register">Register here</Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
