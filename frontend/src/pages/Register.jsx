@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
   const nav = useNavigate();
@@ -55,43 +55,54 @@ export default function Register() {
   }
 
   return (
-    <div className="page-container">
-      <h1>Register</h1>
+    <div>
+      <div className="navbar">eCloud Software FAQ & Help Forum</div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <input
-            value={form.username}
-            onChange={(e) => updateField("username", e.target.value)}
-          />
-          {errors.username && <p>{errors.username}</p>}
-        </div>
+      <div className="page-container">
+        <h1>Register</h1>
 
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value={form.password}
-            onChange={(e) => updateField("password", e.target.value)}
-          />
-          {errors.password && <p>{errors.password}</p>}
-        </div>
-
-        <div>
-          <label>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Username</label>
             <input
-              type="checkbox"
-              checked={form.accept}
-              onChange={(e) => updateField("accept", e.target.checked)}
+              type="text"
+              value={form.username}
+              onChange={(e) => updateField("username", e.target.value)}
             />
-            Accept terms and conditions
-          </label>
-          {errors.accept && <p>{errors.accept}</p>}
-        </div>
+          </div>
+          {errors.username && <p>{errors.username}</p>}
 
-        <button type="submit">Create Account</button>
-      </form>
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              value={form.password}
+              onChange={(e) => updateField("password", e.target.value)}
+            />
+          </div>
+          {errors.password && <p>{errors.password}</p>}
+
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={form.accept}
+                onChange={(e) => updateField("accept", e.target.checked)}
+              />
+              Accept terms and conditions
+            </label>
+          </div>
+          {errors.accept && <p>{errors.accept}</p>}
+
+          <button type="submit">Create Account</button>
+
+          <div className="bottom-link">
+            <p>
+              Already have an account? <Link to="/login">Log in</Link>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

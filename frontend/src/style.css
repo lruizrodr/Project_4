@@ -7,7 +7,28 @@
 
 body {
   background: #f4f4f4;
-  padding: 20px;
+  padding: 0;
+}
+
+.top-nav {
+  width: 100%;
+  background: #1e1e1e;
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 16px;
+}
+
+.top-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.top-nav a:hover {
+  text-decoration: underline;
 }
 
 .navbar {
@@ -18,8 +39,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .page-container {
@@ -29,6 +49,7 @@ body {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  margin-top: 20px;
 }
 
 h1, h2, h3 {
@@ -36,12 +57,24 @@ h1, h2, h3 {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"],
+input[type="search"],
+textarea {
   width: 100%;
   padding: 10px;
+  height: 40px;
+  line-height: 20px;
   border: 1px solid #aaa;
   border-radius: 4px;
   margin-bottom: 10px;
+  font-size: 15px;
+  display: block;
+}
+
+
+input[type="checkbox"] {
+  margin-right: 8px;
 }
 
 label {
@@ -92,6 +125,7 @@ p {
   background: white;
   border-radius: 8px;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .sidebar {

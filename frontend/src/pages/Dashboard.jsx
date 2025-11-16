@@ -7,6 +7,8 @@ export default function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [activeQuestion, setActiveQuestion] = useState(null);
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/api/categories")
@@ -15,6 +17,9 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
+    setActiveQuestion(null);
+    setAnswers([]);
+
     if (!activeCategory) return;
 
     fetch(
@@ -23,6 +28,16 @@ export default function Dashboard() {
       .then((res) => res.json())
       .then((data) => setQuestions(data));
   }, [activeCategory]);
+
+  useEffect(() => {
+    if (!activeQuestion) return;
+
+    fetch(
+      `http://localhost:3001/api/answers?question_id=${activeQuestion.question_id}`
+    )
+      .then((res) => res.json())
+      .then((data) => setAnswers(data));
+  }, [activeQuestion]);
 
   function logout() {
     nav("/login");
@@ -66,12 +81,47 @@ export default function Dashboard() {
             ) : (
               <div>
                 {questions.map((q) => (
-                  <div key={q.question_id} className="question-item">
+                  <div
+                    key={q.question_id}
+                    className="question-item"
+                    onClick={() => setActiveQuestion(q)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <strong>{q.title}</strong>
                     <p>{q.body}</p>
                     <small>
                       Posted by {q.username} on{" "}
                       {new Date(q.created_at).toLocaleString()}
+                    </small>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {activeQuestion && (
+          <>
+            <h3>Answers for: {activeQuestion.title}</h3>
+
+            {answers.length === 0 ? (
+              <p>No answers yet.</p>
+            ) : (
+              <div>
+                {answers.map((a) => (
+                  <div
+                    key={a.answer_id}
+                    style={{
+                      background: "#e9e9e9",
+                      padding: "12px",
+                      borderRadius: "6px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <p>{a.body}</p>
+                    <small>
+                      — {a.username} on{" "}
+                      {new Date(a.created_at).toLocaleString()}
                     </small>
                   </div>
                 ))}

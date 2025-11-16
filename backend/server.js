@@ -5,6 +5,9 @@ import { pool } from "./db.js";
 import authRouter from "./routes/auth.js";
 import categoriesRouter from "./routes/categories.js";
 import questionsRouter from "./routes/questions.js";
+import answersRouter from "./routes/answers.js";
+
+
 
 dotenv.config();
 const app = express();
@@ -14,6 +17,7 @@ app.use(express.json());
 app.use("/api", authRouter);
 app.use("/api", categoriesRouter);
 app.use("/api", questionsRouter);
+app.use("/api", answersRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
