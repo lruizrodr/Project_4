@@ -29,15 +29,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <div
-        style={{
-          width: "200px",
-          borderRight: "1px solid black",
-          overflowY: "auto",
-          padding: "10px",
-        }}
-      >
+    <div className="dashboard-layout">
+      <div className="sidebar">
         <h3>Categories</h3>
         {categories.map((cat) => (
           <div key={cat.category_id}>
@@ -48,9 +41,11 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div style={{ flex: 1, padding: "10px" }}>
-        <h1>Dashboard</h1>
-        <button onClick={logout}>Logout</button>
+      <div className="main-content">
+        <div className="header-bar">
+          <div>Dashboard</div>
+          <button onClick={logout}>Logout</button>
+        </div>
 
         {!activeCategory && <p>Select a Category to view its Questions</p>}
 
@@ -61,18 +56,18 @@ export default function Dashboard() {
             {questions.length === 0 ? (
               <p>No questions in this category.</p>
             ) : (
-              <ul>
+              <div>
                 {questions.map((q) => (
-                  <li key={q.question_id}>
+                  <div key={q.question_id} className="question-item">
                     <strong>{q.title}</strong>
                     <p>{q.body}</p>
                     <small>
                       Posted by {q.username} on{" "}
                       {new Date(q.created_at).toLocaleString()}
                     </small>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             )}
           </>
         )}

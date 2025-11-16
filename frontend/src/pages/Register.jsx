@@ -55,7 +55,7 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Register</h1>
 
       <form onSubmit={handleSubmit}>
