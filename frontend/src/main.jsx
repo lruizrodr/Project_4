@@ -6,9 +6,8 @@ import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import "./style.css";
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/Project_4">
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
